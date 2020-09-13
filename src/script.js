@@ -28,12 +28,66 @@ function displayWeatherCondition(response) {
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.main.temp
   );
+
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
   document.querySelector("#description").innerHTML =
     response.data.weather[0].main;
+
+  document
+    .querySelector("#icon")
+    .setAttribute("src", changeImage(response.data.weather[0].icon));
+  document
+    .querySelector("#icon")
+    .setAttribute("alt", response.data.weather[0].description);
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+}
+
+function changeImage(icon) {
+  let sunny = "media/sun.svg";
+  let sunnyCloudy = "media/cloud-sun.svg";
+  let cloudy = "media/cloud.svg";
+  let rainy = "media/cloud-rain.svg";
+  let stormy = "media/cloud-showers-heavy.svg";
+  let snowy = "media/snowflake.svg";
+  let clearNight = "media/moon.svg";
+  let cloudyNight = "media/cloud-moon.svg";
+  let rainyNight = "media/cloud-rain.svg";
+  let stormyNight = "media/cloud-showers-heavy.svg";
+  let snowyNight = "media/snowflake.svg";
+
+  if (icon === "01d") {
+    return sunny;
+  } else if (icon === "01n") {
+    return clearNight;
+  } else if (icon === "02d") {
+    return sunnyCloudy;
+  } else if (icon === "03d" || icon === "04d") {
+    return cloudy;
+  } else if (icon === "02n" || icon === "03n" || icon === "04n") {
+    return cloudyNight;
+  } else if (icon === "09d") {
+    return rainy;
+  } else if (icon === "09n" || icon === "10n") {
+    return rainyNight;
+  } else if (icon === "11d") {
+    return stormy;
+  } else if (icon === "11n") {
+    return stormyNight;
+  } else if (icon === "13d") {
+    return snowy;
+  } else if (icon === "13n") {
+    return snowyNight;
+  } else {
+    return `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  }
 }
 
 function searchCity(city) {
