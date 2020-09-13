@@ -61,12 +61,13 @@ li {
 }
 
 .fa-sun {
-  font-size: 78px;
+  font-size: 76px;
   line-height: 1;
+  float: left;
   color: #ddf3f5;
-  margin: 0;
+  margin: 16px 0;
   padding: 0;
-  margin-right: 4px;
+  margin-right: 8px;
 }
 
 .weather-temperature strong {
